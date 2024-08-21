@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+  font-family: "Preahvihear", "Zain", sans-serif, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#backgroundcolor {
+  background-image: linear-gradient(to bottom,
+      #232323,
+      #1c1c1c,
+      #151515,
+      #0c0c0c,
+      #000000);
+}
+
+.favlist {
+  background-image: linear-gradient(to right top,
+      #b56090,
+      #c777b9,
+      #ba83ca,
+      #aa8fd8,
+      #9a9ae1,
+      #8aa7ec,
+      #79b3f4,
+      #69bff8,
+      #52cffe,
+      #41dfff,
+      #46eefa,
+      #5ffbf1);
+}
+
+.favlistPage {
+  background-image: linear-gradient(to right top, #ab4b81, #a45896, #9a65a8, #8e72b7, #7f7ec2, #6c87c9, #5890cd, #4498cd, #249fc8, #07a5bf, #1aaab3, #38ada5);
+}
+
+.rhap_main-controls>button>svg {
+  color: #1db954 !important;
+  transition-duration: 300ms !important;
+}
+
+.rhap_container {
+  direction: ltr !important;
+}
+
+.rhap_controls-section:lang(ar) {
+  direction: ltr !important;
+}
+
+.rhap_main-controls>button>svg:hover {
+  color: #147235 !important;
+}
+
+.rhap_progress-filled,
+.rhap_volume-bar {
+  background-color: #1db954 !important;
+}
+
+.rhap_progress-indicator,
+.rhap_volume-indicator {
+  background-color: whitesmoke !important;
+}
+
+#q,
+.rhap_time {
+  color: white !important;
+}
+
+.rhap_button-clear {
+  color: white !important;
+}
+
+.chakra-slide {
+  background-color: #000000 !important;
+}
+
+/* .form__group {
+  position: relative;
+  padding: 20px 0 0;
+  width: 100%;
+  max-width: 180px;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 17px;
+  color: #fff;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 17px;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  color: #9b9b9b;
+  pointer-events: none;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to bottom, #119931, #00bf63);
+  border-image-slice: 1;
+}
+
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 17px;
+  color: #00bf63;
+  font-weight: 700;
+}
+
+/* reset input */
+/* .form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+} */
+
+/* scrool bar width */
+::-webkit-scrollbar {
+  @apply bg-[#1f1f1f] w-[6px];
+}
+
+/* scroll bar Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-[#1ebc4b] rounded-xl;
+}
+
+.SideNavBarBAckground::after {
+  background-image: linear-gradient(to bottom,
+      #202020,
+      #242424,
+      #292829,
+      #2e2d2d,
+      #333131) !important;
+}
+
+.pages {
+  height: 40vh;
+  width: 60%;
+}
+
+.page {
+  height: 100%;
+  width: 100%;
+  user-select: none;
+  touch-action: none;
+}
+
+/* Input */

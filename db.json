@@ -1,0 +1,301 @@
+{
+  "users": [
+    {
+      "id": "6w43h",
+      "firstName": "rana",
+      "lastName": "fathy",
+      "userName": "rana2023",
+      "email": "rana@gmail.com",
+      "password": "12345",
+      "OwnPlaylist": [],
+      "favList": [],
+      "LastPlayed": []
+    },
+    {
+      "id": "sd535hb",
+      "firstName": "aseel",
+      "lastName": "hisham",
+      "userName": "asola",
+      "email": "aseel@gmail.com",
+      "password": "123456",
+      "OwnPlaylist": [],
+      "favList": [],
+      "LastPlayed": []
+    },
+    {
+      "id": "4QIa-U6",
+      "firstName": "yasser",
+      "lastName": "sayed",
+      "userName": "yasser-sayed",
+      "email": "yassersayed@gmail.com",
+      "password": "123456",
+      "OwnPlaylist": [],
+      "favList": [],
+      "LastPlayed": []
+    },
+    {
+      "id": "CHFLqTT",
+      "firstName": "sama ",
+      "lastName": "ahmed",
+      "userName": "sama-ahmed",
+      "email": "sama@gmail.com",
+      "password": "123456 ",
+      "OwnPlaylist": [],
+      "favList": [],
+      "LastPlayed": []
+    },
+    {
+      "id": "mFCwrNj",
+      "firstName": "ziad",
+      "lastName": "ahmed",
+      "userName": "ziad-ahmed",
+      "email": "ziad@gmail.com",
+      "password": "123456",
+      "OwnPlaylist": [],
+      "favList": [],
+      "LastPlayed": []
+    },
+    {
+      "id": "TwVqb08",
+      "firstName": "amira",
+      "lastName": "khaled",
+      "userName": "amira-khaled",
+      "email": "amira@gmail.com",
+      "password": "123456",
+      "OwnPlaylist": [],
+      "favList": [],
+      "LastPlayed": []
+    },
+    {
+      "id": "MpSFYZz",
+      "firstName": "ziad",
+      "lastName": "amir",
+      "userName": "amirr",
+      "email": "ziad-amir@gmail.com",
+      "password": "123456",
+      "OwnPlaylist": [],
+      "favList": [],
+      "LastPlayed": []
+    },
+    {
+      "id": "YJPid87",
+      "firstName": "neven",
+      "lastName": "shokry",
+      "userName": "neven-shokry",
+      "email": "neven@gmail.com",
+      "password": "123456",
+      "OwnPlaylist": [],
+      "favList": [],
+      "LastPlayed": []
+    },
+    {
+      "firstName": "tamer",
+      "lastName": "sa3eed",
+      "userName": "tamer-sa3eed",
+      "email": "tamer@gmail.com",
+      "password": "123456",
+      "OwnPlaylist": [],
+      "id": "ym8L_DD",
+      "favList": [],
+      "LastPlayed": []
+    },
+    {
+      "firstName": "tamara",
+      "lastName": "akmal",
+      "userName": "tamara-akmal",
+      "email": "tamara@gmail.com",
+      "password": "123456",
+      "OwnPlaylist": [],
+      "id": "NQavbZZ",
+      "favList": [],
+      "LastPlayed": []
+    },
+    {
+      "email": "gehadsayed@gmail.com",
+      "password": "123456",
+      "OwnPlaylist": [],
+      "favList": [],
+      "LastPlayed": [],
+      "id": "ZvtaGmi"
+    },
+    {
+      "username": "marwan-farook#",
+      "firstname": "marwan",
+      "lastname": "marwan",
+      "email": "marwanfarook99@gmail.com",
+      "password": "12345",
+      "OwnPlaylist": [],
+      "favList": [],
+      "LastPlayed": [
+        {
+          "currentplaylist": {
+            "name": "Radio Ibrahim Al-Akdar",
+            "id": 1,
+            "url": "https://backup.qurango.net/radio/ibrahim_alakdar"
+          }
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server8.mp3quran.net/majd_onazi//018.mp3",
+            "id": 18,
+            "writer": "Majed Al-Enezi",
+            "name": "Al-Kahf "
+          },
+          "recitersid": 100
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server8.mp3quran.net/majd_onazi//019.mp3",
+            "id": 19,
+            "writer": "Majed Al-Enezi",
+            "name": "Maryam "
+          },
+          "recitersid": 100
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad//001.mp3",
+            "id": 1,
+            "writer": "Maher Al Meaqli",
+            "name": "Al-Fatihah "
+          },
+          "recitersid": 102
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server9.mp3quran.net/akrm//001.mp3",
+            "id": 1,
+            "writer": "Akram Alalaqmi",
+            "name": "Al-Fatihah "
+          },
+          "recitersid": 10
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server6.mp3quran.net/akdr//003.mp3",
+            "id": 3,
+            "writer": "Ibrahim Al-Akdar",
+            "name": "Al-Imran "
+          },
+          "recitersid": 1
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server6.mp3quran.net/akdr//001.mp3",
+            "id": 1,
+            "writer": "Ibrahim Al-Akdar",
+            "name": "Al-Fatihah "
+          },
+          "recitersid": 1
+        },
+        {
+          "currentplaylist": {
+            "name": "Radio Ibrahim Al-Akdar",
+            "id": 1,
+            "url": "https://backup.qurango.net/radio/ibrahim_alakdar"
+          }
+        },
+        {
+          "currentplaylist": {
+            "name": "Radio Al-Qaria Yassen",
+            "id": 10,
+            "url": "https://backup.qurango.net/radio/alqaria_yassen"
+          }
+        },
+        {
+          "currentplaylist": {
+            "name": "Radio Al-Qaria Yassen",
+            "id": 10,
+            "url": "https://backup.qurango.net/radio/alqaria_yassen"
+          }
+        },
+        {
+          "currentplaylist": {
+            "name": "Radio Al-Qaria Yassen",
+            "id": 10,
+            "url": "https://backup.qurango.net/radio/alqaria_yassen"
+          }
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad//008.mp3",
+            "id": 8,
+            "writer": "Maher Al Meaqli",
+            "name": "Al-Anfal "
+          },
+          "recitersid": 102
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad//013.mp3",
+            "id": 13,
+            "writer": "Maher Al Meaqli",
+            "name": "Ar-Ra'd "
+          },
+          "recitersid": 102
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server12.mp3quran.net/maher/Almusshaf-Al-Mojawwad//017.mp3",
+            "id": 17,
+            "writer": "Maher Al Meaqli",
+            "name": "Al-Isra "
+          },
+          "recitersid": 102
+        },
+        {
+          "currentplaylist": {
+            "name": "Radio Ibrahim Al-Akdar",
+            "id": 1,
+            "url": "https://backup.qurango.net/radio/ibrahim_alakdar"
+          }
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server6.mp3quran.net/akdr//001.mp3",
+            "id": 1,
+            "writer": "Ibrahim Al-Akdar",
+            "name": "Al-Fatihah "
+          },
+          "recitersid": 1
+        },
+        {
+          "currentplaylist": {
+            "name": "Radio Al-Qaria Yassen",
+            "id": 10,
+            "url": "https://backup.qurango.net/radio/alqaria_yassen"
+          }
+        },
+        {
+          "currentplaylist": {
+            "name": "Radio Mohammed Osman Khan",
+            "id": 103,
+            "url": "https://backup.qurango.net/radio/mohammed_osman_khan"
+          }
+        },
+        {
+          "currentplaylist": {
+            "name": "Radio Ibrahim Al-Akdar",
+            "id": 1,
+            "url": "https://backup.qurango.net/radio/ibrahim_alakdar"
+          }
+        },
+        {
+          "currentplaylist": {
+            "name": "Radio Al-Qaria Yassen",
+            "id": 10,
+            "url": "https://backup.qurango.net/radio/alqaria_yassen"
+          }
+        },
+        {
+          "currentplaylist": {
+            "name": "Radio Ahmed Al-trabulsi",
+            "id": 100,
+            "url": "https://backup.qurango.net/radio/ahmed_altrabulsi"
+          }
+        }
+      ],
+      "id": "j3LsgxM"
+    }
+  ]
+}
