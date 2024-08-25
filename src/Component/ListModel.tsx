@@ -99,6 +99,7 @@ const ListModel = () => {
                       id: userobjecttype?.id,
                       description,
                       userobjecttype,
+                      Data: [],
                     })
                   )
                 }
