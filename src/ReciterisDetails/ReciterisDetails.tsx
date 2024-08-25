@@ -11,7 +11,9 @@ import {
   MenuItem,
   MenuList,
   SimpleGrid,
+  MenuDivider,
 } from "@chakra-ui/react";
+import { HiChevronDown } from "react-icons/hi2";
 import { AiOutlineMenu } from "react-icons/ai";
 import "../index.css";
 import { AppDispatch, RootState } from "../ReduxSystem/Store/Store";
@@ -22,20 +24,17 @@ import { Key, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { reciters } from "../types/data";
 import { FaPlay } from "react-icons/fa";
-
 import {
   useChoosenReciteirsQuery,
   useSuwarIdQuery,
 } from "../ReduxSystem/RTkQuery/HomeApi";
-import { MdOutlineFileDownloadDone } from "react-icons/md";
-
-import { IoMdAddCircleOutline } from "react-icons/io";
-
+import { IoMdAdd, IoMdDownload } from "react-icons/io";
 import {
   clickedSuwra,
   currentdata,
   Searchsuwra,
 } from "../ReduxSystem/recitersData";
+import { CiPlay1 } from "react-icons/ci";
 import { MdOutlinePauseCircleFilled } from "react-icons/md";
 import image from "../../public/Social_Media_Chatting_Online_Blank_Profile_Picture_Head_And_Body_Icon_People_Standing_Icon_Grey_Background_generated.jpg";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -43,7 +42,13 @@ import { Card, Typography } from "@material-tailwind/react";
 import { IoLibrary } from "react-icons/io5";
 import SideBar from "../Component/SideBar";
 import DrawerComponent from "../Component/Drawer";
-import { userdataFavList, userdatalastPLayed } from "../ReduxSystem/userSlice";
+import {
+  userdataAddInOwnList,
+  userdataFavList,
+  userdatalastPLayed,
+} from "../ReduxSystem/userSlice";
+import { BsThreeDots } from "react-icons/bs";
+import ListModel from "../Component/ListModel";
 const ReciterisDetails = () => {
   const [recitersId, setrecitersId] = useState(0);
   const [Bollean, setBollean] = useState(false);
@@ -74,16 +79,19 @@ const ReciterisDetails = () => {
       choosendata &&
       dispatch(currentdata({ choosendata, SuwarData, rewaya }));
     setloading(false);
-    const Checkreciters = userobjecttype?.favList.some(({ currentreciters }: { currentreciters: { id: string } }) => {
-      return currentreciters.id == id
-    })
-    setChecked(Checkreciters)
+    const Checkreciters = userobjecttype?.favList.some(
+      ({ currentreciters }: { currentreciters: { id: string } }) => {
+        return currentreciters.id == id;
+      }
+    );
+    setChecked(Checkreciters);
   }, [
     SuwarData,
     choosendata,
     reciters[recitersId],
     rewaya,
     userobjecttype?.LastPlayed.length,
+    userobjecttype?.OwnPlaylist.length,
   ]);
 
   const rewayachoosen = () => {
@@ -377,7 +385,7 @@ const ReciterisDetails = () => {
                     className="rounded-full  text-[#1DB954] duration-500  cursor-pointer hover:scale-110 text-5xl "
                   />
                 )}
-                {Checked ?
+                {Checked ? (
                   <Button
                     rounded={20}
                     color={"white"}
@@ -385,18 +393,16 @@ const ReciterisDetails = () => {
                     variant="outline"
                     onClick={() => ""}
                   >
-                    <h1>
-                      {language === "ar" ? "تتابعه" : "Following"}
-                    </h1>
+                    <h1>{language === "ar" ? "تتابعه" : "Following"}</h1>
                   </Button>
-                  :
+                ) : (
                   <Button
                     rounded={20}
                     color={"white"}
                     className="hover:scale-110 hover:bg-transparent hover:text-black"
                     variant="outline"
                     onClick={() => {
-                      setChecked(true)
+                      setChecked(true);
                       dispatch(
                         userdataFavList({
                           id: userobjecttype?.id,
@@ -410,22 +416,19 @@ const ReciterisDetails = () => {
                               ...(userobjecttype?.favList as []),
                               {
                                 currentreciters: choosendata.reciters[0],
-                                recitersid: choosendata.reciters[0].id
+                                recitersid: choosendata.reciters[0].id,
                               },
                             ],
                             LastPlayed: userobjecttype?.LastPlayed,
                             id: userobjecttype?.id,
                           },
                         })
-                      )
-                    }
-                    }
+                      );
+                    }}
                   >
-                    <h1>
-                      {language === "ar" ? "متابعه" : "Follow"}
-                    </h1>
+                    <h1>{language === "ar" ? "متابعه" : "Follow"}</h1>
                   </Button>
-                }
+                )}
               </div>
               <div className="flex gap-3 p-5 items-center flex-wrap justify-center  ">
                 {/* inputSearch */}
@@ -443,10 +446,11 @@ const ReciterisDetails = () => {
                     </svg>
                   </div>
                   <input
-                    placeholder={`${language === "ar"
-                      ? "ابحث في قائمة التشغيل"
-                      : "Search in Playlist"
-                      }`}
+                    placeholder={`${
+                      language === "ar"
+                        ? "ابحث في قائمة التشغيل"
+                        : "Search in Playlist"
+                    }`}
                     onChange={(e) => SerachSwura(e.target.value)}
                     type="text"
                     className="outline-none  bg-[#242424] w-full text-white   font-normal px-4"
@@ -511,98 +515,225 @@ const ReciterisDetails = () => {
               <div>
                 {searchSwura?.length == 0 ? (
                   <div>
-                    {currentplaylist?.map(({ name, writer }, index) => (
-                      <Box
-                        cursor={"pointer"}
-                        key={index}
-                        bg="transparent"
-                        w="100%"
-                        p={4}
-                        color="white"
-                        className="group hover:bg-[#58545485] "
-                        onClick={() => {
-                          dispatch(
-                            clickedSuwra({
-                              currentplaylist,
-                              index,
-                              boolean: true,
-                            })
-                          );
-                          setplayed(true);
-                          // ____//
-                          setBollean(!Bollean);
-                          dispatch(
-                            userdatalastPLayed({
-                              id: userobjecttype?.id,
-                              arguments: {
-                                username: userobjecttype?.username,
-                                firstname: userobjecttype?.firstname,
-                                lastname: userobjecttype?.lastname,
-                                email: userobjecttype?.email,
-                                password: userobjecttype?.password,
-                                favList: [],
-                                LastPlayed: [
-                                  ...(userobjecttype?.LastPlayed as []),
-                                  {
-                                    currentplaylist: currentplaylist[index],
-                                    recitersid: recitersId,
-                                  },
-                                ],
-                                id: userobjecttype?.id,
-                              },
-                            })
-                          );
-                        }}
-                      >
-                        <HStack spacing="24px">
-                          <Box
-                            w="70px"
-                            className="text-center font-extrabold text-xl"
-                          >
-                            <div className=" ms-20 flex flex-row-reverse items-center gap-5">
-                              {
-                                <Avatar
-                                  src={reciters[recitersId]}
-                                  name={`${writer}`}
-                                />
-                              }
-                              <div className="group flex duration-150 cursor-pointer">
-                                <h1 className="group-hover:hidden text-gray-400">
-                                  {index + 1}
-                                </h1>
-                                <FaPlay className=" hidden group-hover:block text-xl text-white " />
+                    {currentplaylist?.map(
+                      ({ name, writer, id, src }, index) => (
+                        <Box
+                          cursor={"pointer"}
+                          key={index}
+                          bg="transparent"
+                          w="100%"
+                          p={4}
+                          color="white"
+                          className="group hover:bg-[#58545485] "
+                        >
+                          <HStack spacing="24px">
+                            <Box
+                              w="70px"
+                              className="text-center font-extrabold text-xl"
+                            >
+                              <div className=" ms-20 flex flex-row-reverse items-center gap-5">
+                                {
+                                  <Avatar
+                                    src={reciters[recitersId]}
+                                    name={`${writer}`}
+                                  />
+                                }
+                                <div className="group flex duration-150 cursor-pointer">
+                                  <h1 className="group-hover:hidden text-gray-400">
+                                    {index + 1}
+                                  </h1>
+                                  <FaPlay
+                                    onClick={() => {
+                                      dispatch(
+                                        clickedSuwra({
+                                          currentplaylist,
+                                          index,
+                                          boolean: true,
+                                        })
+                                      );
+                                      setplayed(true);
+                                      // ____//
+                                      setBollean(!Bollean);
+                                      dispatch(
+                                        userdatalastPLayed({
+                                          id: userobjecttype?.id,
+                                          arguments: {
+                                            username: userobjecttype?.username,
+                                            firstname:
+                                              userobjecttype?.firstname,
+                                            lastname: userobjecttype?.lastname,
+                                            email: userobjecttype?.email,
+                                            password: userobjecttype?.password,
+                                            favList: [],
+                                            LastPlayed: [
+                                              ...(userobjecttype?.LastPlayed as []),
+                                              {
+                                                currentplaylist:
+                                                  currentplaylist[index],
+                                                recitersid: recitersId,
+                                              },
+                                            ],
+                                            id: userobjecttype?.id,
+                                          },
+                                        })
+                                      );
+                                    }}
+                                    className=" hidden group-hover:block text-xl text-white "
+                                  />
+                                </div>
                               </div>
-                            </div>
-                          </Box>
-                          <Box
-                            w="1170px"
-                            className={`text-center font-extrabold ${language === "ar"
-                              ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
-                              : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
+                            </Box>
+                            <Box
+                              w="1170px"
+                              className={`text-center font-extrabold ${
+                                language === "ar"
+                                  ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
+                                  : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
                               } `}
-                          >
-                            {name}
-                          </Box>
-                          <Box
-                            w="1180px"
-                            className="text-center font-extrabold mobile:text-[0.8em] tablet:text-sm laptop:text-xl "
-                          >
-                            {writer}
-                          </Box>
-                          {false ? (
-                            <MdOutlineFileDownloadDone
-                              onClick={() => setBollean(!Bollean)}
-                              className="text-gray-600 hover:text-white text-7xl hidden group-hover:block hover:scale-110 duration-200 "
-                            />
-                          ) : (
-                            <IoMdAddCircleOutline
+                            >
+                              {name}
+                            </Box>
+                            <Box
+                              w="1180px"
+                              className="text-center font-extrabold mobile:text-[0.8em] tablet:text-sm laptop:text-xl "
+                            >
+                              {writer}
+                            </Box>
+                            <Box w="80px">
+                              <Menu>
+                                <MenuButton
+                                  bg={"transparent"}
+                                  _hover={{
+                                    bg: "transparent",
+                                  }}
+                                  className="group-hover:!text-white !text-2xl"
+                                  as={Button}
+                                  rightIcon={<BsThreeDots />}
+                                ></MenuButton>
+                                <MenuList
+                                  border={0}
+                                  color={"white"}
+                                  bg={"#222222"}
+                                >
+                                  <Menu placement="left">
+                                    <MenuButton
+                                      w={"100%"}
+                                      px={4}
+                                      py={2}
+                                      transition="all 0.2s"
+                                      borderRadius="md"
+                                      borderWidth="0px"
+                                      _hover={{ bg: "#3E3C3C" }}
+                                      _expanded={{ bg: "transparent" }}
+                                      _focus={{ boxShadow: "none" }}
+                                    >
+                                      <h1 className="flex items-center justify-between ">
+                                        {language === "ar"
+                                          ? "وضع في قيمه خاصه"
+                                          : "Add to playlist"}
+                                        <HiChevronDown />
+                                      </h1>
+                                    </MenuButton>
+                                    <MenuList borderWidth="0px" bg={"#222222"}>
+                                      <MenuItem
+                                        _hover={{ bg: "#3E3C3C" }}
+                                        bg={"#222222"}
+                                        gap={2}
+                                      >
+                                        <IoMdAdd className="text-xl" />
+                                        <ListModel />
+                                      </MenuItem>
 
-                              className="text-gray-600 hover:text-white text-7xl hidden group-hover:block hover:scale-110 duration-200 "
-                            />
-                          )}
-                        </HStack>
-                      </Box>
-                    ))}
+                                      <MenuDivider />
+                                      {userobjecttype?.OwnPlaylist.map(
+                                        ({ title, Data }, index) => (
+                                          <MenuItem
+                                            key={index}
+                                            _hover={{ bg: "#3E3C3C" }}
+                                            bg={"#222222"}
+                                            onClick={() =>
+                                              dispatch(
+                                                userdataAddInOwnList({
+                                                  id: userobjecttype.id,
+                                                  data: [
+                                                    ...Data,
+                                                    { name, writer, id, src },
+                                                  ],
+                                                })
+                                              )
+                                            }
+                                          >
+                                            {title}
+                                          </MenuItem>
+                                        )
+                                      )}
+                                    </MenuList>
+                                  </Menu>
+
+                                  <MenuItem
+                                    _hover={{
+                                      bg: "#3E3C3C",
+                                    }}
+                                    bg={"#222222"}
+                                  >
+                                    <div className="flex w-[100%] justify-between items-center">
+                                      Download
+                                      <IoMdDownload />
+                                    </div>
+                                  </MenuItem>
+                                  <MenuItem
+                                    onClick={() => {
+                                      dispatch(
+                                        clickedSuwra({
+                                          currentplaylist,
+                                          index,
+                                          boolean: true,
+                                        })
+                                      );
+                                      setplayed(true);
+                                      // ____//
+                                      setBollean(!Bollean);
+                                      dispatch(
+                                        userdatalastPLayed({
+                                          id: userobjecttype?.id,
+                                          arguments: {
+                                            username: userobjecttype?.username,
+                                            firstname:
+                                              userobjecttype?.firstname,
+                                            lastname: userobjecttype?.lastname,
+                                            email: userobjecttype?.email,
+                                            password: userobjecttype?.password,
+                                            favList: [],
+                                            LastPlayed: [
+                                              ...(userobjecttype?.LastPlayed as []),
+                                              {
+                                                currentplaylist:
+                                                  currentplaylist[index],
+                                                recitersid: recitersId,
+                                              },
+                                            ],
+                                            id: userobjecttype?.id,
+                                          },
+                                        })
+                                      );
+                                    }}
+                                    _hover={{
+                                      bg: "#3E3C3C",
+                                    }}
+                                    bg={"#222222"}
+                                  >
+                                    <div className="flex w-[100%] justify-between items-center">
+                                      Play
+                                      <CiPlay1 />
+                                    </div>
+                                  </MenuItem>
+                                </MenuList>
+                              </Menu>
+                            </Box>
+                          </HStack>
+                        </Box>
+                      )
+                    )}
                   </div>
                 ) : (
                   <div className="h-auto">
@@ -622,7 +753,7 @@ const ReciterisDetails = () => {
                               writer: writer,
                               id: id,
                               src: src,
-                            }),
+                            })
                           ),
                             setBollean(!Bollean);
                           dispatch(
@@ -670,10 +801,11 @@ const ReciterisDetails = () => {
                           </Box>
                           <Box
                             w="1170px"
-                            className={`text-center font-extrabold ${language === "ar"
-                              ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
-                              : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
-                              }`}
+                            className={`text-center font-extrabold ${
+                              language === "ar"
+                                ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
+                                : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
+                            }`}
                           >
                             {name}
                           </Box>

@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Grid,
   GridItem,
   HStack,
@@ -8,6 +9,10 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   SimpleGrid,
 } from "@chakra-ui/react";
 import "../index.css";
@@ -22,13 +27,17 @@ import { IoLibrary } from "react-icons/io5";
 import { Changestate, choosenRadioAudio } from "../ReduxSystem/RadioSlice";
 import SideBar from "../Component/SideBar";
 import DrawerComponent from "../Component/Drawer";
-
+import menu from "../../public/menu.png";
 import { useState } from "react";
-import { CiSearch } from "react-icons/ci";
+import { CiPlay1, CiSearch } from "react-icons/ci";
 import { userdatalastPLayed } from "../ReduxSystem/userSlice";
+import { MdAddCircleOutline } from "react-icons/md";
+import { IoMdDownload } from "react-icons/io";
 const radio = () => {
   const { language } = useSelector((state: RootState) => state.Settings);
-  const { userobjecttype } = useSelector((state: RootState) => state.userslogindata);
+  const { userobjecttype } = useSelector(
+    (state: RootState) => state.userslogindata
+  );
   const [search, setsearch] = useState<null | []>(null);
   const { data, isLoading } = useRadioPlaylistQuery(
     language === "ar" ? "ar" : "eng"
@@ -45,8 +54,6 @@ const radio = () => {
     });
     setsearch(RadioSearch);
   };
-
-
 
   return (
     <div>
@@ -271,21 +278,24 @@ const radio = () => {
                 {language === "ar" ? "جميع الاذاعات" : "All Radio"}
               </h1>
               <div>
-                <InputGroup  >
-                  <InputLeftElement pointerEvents='none'>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none">
                     <CiSearch className="text-white" />
                   </InputLeftElement>
                   <Input
                     className="rounded-full"
-                    focusBorderColor='#1DB954'
+                    focusBorderColor="#1DB954"
                     color={"white"}
                     onChange={(e) => {
                       SearchBar(e.target.value);
                     }}
-                    type='text' htmlSize={14} width='auto' placeholder={`${language === "ar"
-                      ? "ابحث عن قاري"
-                      : " Search reciters ?"
-                      }`} />
+                    type="text"
+                    htmlSize={14}
+                    width="auto"
+                    placeholder={`${
+                      language === "ar" ? "ابحث عن قاري" : " Search reciters ?"
+                    }`}
+                  />
                 </InputGroup>
               </div>
             </div>
@@ -294,7 +304,11 @@ const radio = () => {
                 <div className="h-[200vh]">
                   {search.map(
                     (
-                      { name, url, id }: { name: string; url: string, id: number },
+                      {
+                        name,
+                        url,
+                        id,
+                      }: { name: string; url: string; id: number },
                       index: number
                     ) => (
                       <Box
@@ -305,7 +319,7 @@ const radio = () => {
                               nameAudio: name,
                               id: id,
                               index: index,
-                              url: ""
+                              url: "",
                             })
                           ),
                             dispatch(Changestate());
@@ -342,40 +356,14 @@ const radio = () => {
               <div>
                 {data.radios.map(
                   (
-                    { name, url, id }: { name: string; url: string, id: number },
+                    {
+                      name,
+                      url,
+                      id,
+                    }: { name: string; url: string; id: number },
                     index: number
                   ) => (
                     <Box
-                      onClick={() => {
-                        dispatch(
-                          choosenRadioAudio({
-                            urlaudio: url, nameAudio: name, id, index,
-                            url: ""
-                          })
-                        ),
-                          dispatch(Changestate());
-                        dispatch(
-                          userdatalastPLayed({
-                            id: userobjecttype?.id,
-                            arguments: {
-                              username: userobjecttype?.username,
-                              firstname: userobjecttype?.firstname,
-                              lastname: userobjecttype?.lastname,
-                              email: userobjecttype?.email,
-                              password: userobjecttype?.password,
-                              favList: [],
-                              LastPlayed: [
-                                ...(userobjecttype?.LastPlayed as []),
-                                {
-                                  currentplaylist: { name, id, url },
-
-                                },
-                              ],
-                              id: userobjecttype?.id,
-                            },
-                          })
-                        );
-                      }}
                       cursor={"pointer"}
                       key={index}
                       bg="transparent"
@@ -386,7 +374,41 @@ const radio = () => {
                     >
                       <HStack spacing="24px">
                         <Box className="group text-center font-extrabold text-xl">
-                          <div className="flex laptop:items-end tablet:items-center tablet:justify-center">
+                          <div
+                            onClick={() => {
+                              dispatch(
+                                choosenRadioAudio({
+                                  urlaudio: url,
+                                  nameAudio: name,
+                                  id,
+                                  index,
+                                  url: "",
+                                })
+                              ),
+                                dispatch(Changestate());
+                              dispatch(
+                                userdatalastPLayed({
+                                  id: userobjecttype?.id,
+                                  arguments: {
+                                    username: userobjecttype?.username,
+                                    firstname: userobjecttype?.firstname,
+                                    lastname: userobjecttype?.lastname,
+                                    email: userobjecttype?.email,
+                                    password: userobjecttype?.password,
+                                    favList: [],
+                                    LastPlayed: [
+                                      ...(userobjecttype?.LastPlayed as []),
+                                      {
+                                        currentplaylist: { name, id, url },
+                                      },
+                                    ],
+                                    id: userobjecttype?.id,
+                                  },
+                                })
+                              );
+                            }}
+                            className="flex laptop:items-end tablet:items-center tablet:justify-center"
+                          >
                             <Avatar name={name} position={"relative"} />
                             <BsPlayCircleFill className="rounded-full scale-0 group-hover:scale-110 text-[#1DB954] duration-500  z-[999]   absolute  bg-[#000000] text-5xl  " />
                           </div>
@@ -397,6 +419,91 @@ const radio = () => {
                           className="text-center font-extrabold mobile:text-[1.4em] tablet:text-xl laptop:text-   xl "
                         >
                           {name}
+                        </Box>
+                        <Box w="180px">
+                          <Menu>
+                            <MenuButton
+                              bg={"transparent"}
+                              _hover={{
+                                bg: "#1EBC4B",
+                              }}
+                              as={Button}
+                              rightIcon={<img src={menu} width={20} alt="" />}
+                            ></MenuButton>
+                            <MenuList border={0} color={"white"} bg={"black"}>
+                              <MenuItem
+                                _hover={{
+                                  bg: "#3E3C3C",
+                                }}
+                                bg={"black"}
+                              >
+                                <div className="flex w-[100%] justify-between items-center">
+                                  Add To PlayList
+                                  <MdAddCircleOutline />
+                                </div>
+                              </MenuItem>
+                              <MenuItem
+                                _hover={{
+                                  bg: "#3E3C3C",
+                                }}
+                                bg={"black"}
+                              >
+                                <div className="flex w-[100%] justify-between items-center">
+                                  Download
+                                  <IoMdDownload />
+                                </div>
+                              </MenuItem>
+                              <MenuItem
+                                _hover={{
+                                  bg: "#3E3C3C",
+                                }}
+                                bg={"black"}
+                              >
+                                <div
+                                  onClick={() => {
+                                    dispatch(
+                                      choosenRadioAudio({
+                                        urlaudio: url,
+                                        nameAudio: name,
+                                        id,
+                                        index,
+                                        url: "",
+                                      })
+                                    ),
+                                      dispatch(Changestate());
+                                    dispatch(
+                                      userdatalastPLayed({
+                                        id: userobjecttype?.id,
+                                        arguments: {
+                                          username: userobjecttype?.username,
+                                          firstname: userobjecttype?.firstname,
+                                          lastname: userobjecttype?.lastname,
+                                          email: userobjecttype?.email,
+                                          password: userobjecttype?.password,
+                                          favList: [],
+                                          LastPlayed: [
+                                            ...(userobjecttype?.LastPlayed as []),
+                                            {
+                                              currentplaylist: {
+                                                name,
+                                                id,
+                                                url,
+                                              },
+                                            },
+                                          ],
+                                          id: userobjecttype?.id,
+                                        },
+                                      })
+                                    );
+                                  }}
+                                  className="flex w-[100%] justify-between items-center"
+                                >
+                                  Play
+                                  <CiPlay1 />
+                                </div>
+                              </MenuItem>
+                            </MenuList>
+                          </Menu>
                         </Box>
                       </HStack>
                     </Box>

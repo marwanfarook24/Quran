@@ -9,6 +9,7 @@ type data = {
   password: string;
   favList: [];
   LastPlayed: [];
+  OwnPlaylist: [];
   id: string | number;
 };
 
@@ -29,6 +30,7 @@ type props = {
 type test = number | string;
 
 type userobj = {
+  OwnList: true | false;
   updateState: true | false;
   UserObject: [];
   userobjecttype: null | {
@@ -39,6 +41,7 @@ type userobj = {
     password: string;
     favList: [];
     LastPlayed: [];
+    OwnPlaylist: [];
     id: string | number;
   };
   loading: boolean;
@@ -49,6 +52,7 @@ const userobject: userobj = {
   userobjecttype: null,
   UserObject: [],
   loading: false,
+  OwnList: false,
 };
 
 export const userdatalogin = createAsyncThunk<
@@ -74,7 +78,6 @@ export const userdatalastPLayed = createAsyncThunk<
   { rejectedMeta?: String }
 >("userdatalastPLayed", async (arg, AsyncThunk) => {
   const { rejectWithValue } = AsyncThunk;
-
 
   try {
     const info = await axios({
@@ -113,12 +116,12 @@ export const userdataFavList = createAsyncThunk<
   }
 });
 type PlayList = {
-  id: string | number | undefined,
-  Title: string,
-  description: string,
-  userobjecttype: any,
-
-}
+  id: string | number | undefined;
+  Title: string;
+  description: string;
+  userobjecttype: any;
+  Data: [];
+};
 
 export const userdataOwnList = createAsyncThunk<
   PlayList,
@@ -126,16 +129,39 @@ export const userdataOwnList = createAsyncThunk<
   { rejectedMeta?: String }
 >("userdataOwnList", async (arg, AsyncThunk) => {
   const { rejectWithValue } = AsyncThunk;
-  console.log(arg);
-
-
   try {
     const info = await axios({
       method: "patch",
       url: `http://localhost:3000/users/${arg.id}`,
       data: {
         ...arg.userobjecttype,
-        OwnPlaylist: [...arg.userobjecttype.OwnPlaylist, { title: arg.Title, description: arg.description }],
+        OwnPlaylist: [
+          ...arg.userobjecttype.OwnPlaylist,
+          { title: arg.Title, description: arg.description, Data: arg.Data },
+        ],
+      },
+    });
+
+    return info.data;
+  } catch (e) {
+    console.log(rejectWithValue(e));
+  }
+});
+export const userdataAddInOwnList = createAsyncThunk<
+  any,
+  any,
+  { rejectedMeta?: String }
+>("userdataAddInOwnList", async (arg, AsyncThunk) => {
+  console.log(arg);
+
+  const { rejectWithValue } = AsyncThunk;
+  try {
+    const info = await axios({
+      method: "patch",
+      url: `http://localhost:3000/users/${arg.id}`,
+      data: {
+        ...arg.userobjecttype,
+        OwnPlaylist: [...arg.data],
       },
     });
 
@@ -161,9 +187,11 @@ const userslogin = createSlice({
       state.UserObject = Shift;
     },
     UnshiftLastPlayed: (state, { payload }) => {
-      const UnShift = payload?.LastPlayed.filter((_prop: {}, _index: number) => {
-        return _prop;
-      });
+      const UnShift = payload?.LastPlayed.filter(
+        (_prop: {}, _index: number) => {
+          return _prop;
+        }
+      );
       state.UserObject = UnShift;
     },
   },
@@ -178,7 +206,7 @@ const userslogin = createSlice({
         _state.userobjecttype = action.payload;
       }
     );
-    builder.addCase(userdatalogin.rejected, (_state, _action) => { });
+    builder.addCase(userdatalogin.rejected, (_state, _action) => {});
 
     builder.addCase(userdatalastPLayed.pending, (_state, _action) => {
       // _state.loading = true
@@ -189,7 +217,7 @@ const userslogin = createSlice({
         _state.updateState = !_state.updateState;
       }
     );
-    builder.addCase(userdatalastPLayed.rejected, (_state, _action) => { });
+    builder.addCase(userdatalastPLayed.rejected, (_state, _action) => {});
     builder.addCase(userdataFavList.pending, (_state, _action) => {
       // _state.loading = true
     });
@@ -199,11 +227,16 @@ const userslogin = createSlice({
         _state.updateState = !_state.updateState;
       }
     );
-    builder.addCase(userdataFavList.rejected, (_state, _action) => { });
-
+    builder.addCase(userdataFavList.rejected, (_state, _action) => {});
+    builder.addCase(userdataOwnList.pending, (_state, _action) => {
+      // _state.loading = true
+    });
+    builder.addCase(userdataOwnList.fulfilled, (_state, _action) => {
+      _state.OwnList = true;
+    });
+    builder.addCase(userdataOwnList.rejected, (_state, _action) => {});
   },
   // ________________________________________________________//
-
 });
 
 export const { unsetobj, shiftLAstPlayed, UnshiftLastPlayed } =

@@ -15,11 +15,7 @@ import {
   useRewayaIdQuery,
   useSuwarIdQuery,
 } from "../ReduxSystem/RTkQuery/HomeApi";
-import {
-  Avatar, Input,
-  InputGroup,
-  InputLeftElement,
-} from "@chakra-ui/react";
+import { Avatar, Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { reciters } from "../types/data";
 import { BsPlayCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
@@ -79,7 +75,7 @@ const Home = () => {
     } else {
       dispatch(SearchBar(null));
     }
-  }, [search])
+  }, [search]);
 
   return (
     <div id="backgroundcolor">
@@ -90,7 +86,11 @@ const Home = () => {
         fontWeight="bold"
       >
         <GridItem area={"nav"}>
-          <div className={` mobile:hidden tablet:block sticky overflow-x-hidden overflow-y-scroll bg-black top-[4em] ${isLoading ? "w-[60%]" : ""} `}>
+          <div
+            className={` mobile:hidden tablet:block sticky overflow-x-hidden overflow-y-scroll bg-black top-[4em] ${
+              isLoading ? "w-[60%]" : ""
+            } `}
+          >
             <SideBar isLoading={isLoading} />
           </div>
           <div>
@@ -116,10 +116,11 @@ const Home = () => {
                 </div>
 
                 <Chip
-                  className={`${window.location.href == "http://localhost:5173/"
-                    ? "bg-white text-black"
-                    : "bg-gray-800"
-                    }  cursor-pointer border-gray-200 rounded-[3em]`}
+                  className={`${
+                    window.location.href == "http://localhost:5173/"
+                      ? "bg-white text-black"
+                      : "bg-gray-800"
+                  }  cursor-pointer border-gray-200 rounded-[3em]`}
                   value="All"
                 />
 
@@ -154,7 +155,9 @@ const Home = () => {
                       <TabList>
                         <Tab>{language === "ar" ? "رويات" : "Riwayat"}</Tab>
                         <Tab>{language === "ar" ? "سور" : "suwer"}</Tab>
-                        <Tab className="mobile:!block tablet:!hidden">{language === "ar" ? "بحث" : "Search"}</Tab>
+                        <Tab className="mobile:!block tablet:!hidden">
+                          {language === "ar" ? "بحث" : "Search"}
+                        </Tab>
                       </TabList>
                       <TabIndicator
                         mt="-1.5px"
@@ -228,33 +231,32 @@ const Home = () => {
                             )
                           )}
                         </TabPanel>
-                        <TabPanel className="" >
-
-                        </TabPanel>
-
+                        <TabPanel className=""></TabPanel>
                       </TabPanels>
                     </Tabs>
                   </MenuList>
                 </Menu>
               </div>
-
             </div>
-            <div className="!flex !justify-center mobile:!block tablet:!hidden " >
+            <div className="!flex !justify-center mobile:!block tablet:!hidden ">
               <div className="">
-                <InputGroup  >
-                  <InputLeftElement pointerEvents='none'>
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none">
                     <CiSearch className="text-white" />
                   </InputLeftElement>
                   <Input
-                    focusBorderColor='#1DB954'
+                    focusBorderColor="#1DB954"
                     color={"white"}
                     onChange={(e) => {
                       setSearch(e.target.value);
                     }}
-                    type='text' htmlSize={20} width='auto' placeholder={`${language === "ar"
-                      ? "ابحث عن قاري"
-                      : " Search reciters ?"
-                      }`} />
+                    type="text"
+                    htmlSize={20}
+                    width="auto"
+                    placeholder={`${
+                      language === "ar" ? "ابحث عن قاري" : " Search reciters ?"
+                    }`}
+                  />
                 </InputGroup>
               </div>
             </div>

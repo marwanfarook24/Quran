@@ -17,7 +17,7 @@ import AyahtTime from "./AyahtTiming/AyahtTime";
 import { userdatalogin } from "./ReduxSystem/userSlice";
 import FavListPage from "./FavouriteList/FavListPage";
 function App() {
-  const { userobjecttype, updateState } = useSelector(
+  const { userobjecttype, updateState, OwnList } = useSelector(
     (state: RootState) => state.userslogindata
   );
   const { language } = useSelector((state: RootState) => state.Settings);
@@ -30,7 +30,7 @@ function App() {
     if (userobjecttype) {
       dispatch(userdatalogin(userobjecttype ? userobjecttype.id : "0"));
     }
-  }, [state, updateState]);
+  }, [state, updateState, OwnList]);
   return (
     <div>
       <NavBar />
@@ -55,12 +55,10 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         )}
         <Route path="*" element={<ErrorPage />} />
-
       </Routes>
       <div className="sticky bottom-0">
         {state ? <AudioPlayerRadio /> : <AudioPlayerPrimary />}
       </div>
-
     </div>
   );
 }

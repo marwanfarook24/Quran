@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -18,15 +18,13 @@ import {
   PopoverCloseButton,
   PopoverHeader,
   PopoverBody,
-  Alert,
-  AlertIcon,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../ReduxSystem/Store/Store";
 import { userdataOwnList } from "../ReduxSystem/userSlice";
-const ModelComponent = () => {
+const ListModel = () => {
   const { language } = useSelector((state: RootState) => state.Settings);
-  const { userobjecttype, OwnList } = useSelector(
+  const { userobjecttype } = useSelector(
     (state: RootState) => state.userslogindata
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,32 +33,13 @@ const ModelComponent = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [description, setdescription] = useState("");
   const [Title, setTitle] = useState("");
-  useEffect(() => {}, [OwnList]);
 
   return (
     <>
-      <Box bg="#1F1F1F" p={7} className="flex flex-col items-start gap-3">
-        <h1 className="text-white  text-xl font-extrabold ">
-          {language === "ar"
-            ? " اصنع قائمة التشغيل الخاصه بك  "
-            : "Create you own Playlist"}
+      <Box>
+        <h1 onClick={onOpen} className="font-extrabold hover:scale-105 p-2   ">
+          {language === "ar" ? "قائمة جديده" : "New Playlist"}
         </h1>
-        <p className="text-white  text-sm font-extrabold ">
-          {language === "ar"
-            ? "هذه سهل سوف نساعدك"
-            : "it,s easy we will help you"}
-        </p>
-        <Button
-          onClick={onOpen}
-          bg={"white"}
-          color={"black"}
-          className="font-extrabold hover:scale-105   "
-          padding={6}
-          width="200px"
-          borderRadius={20}
-        >
-          {language === "ar" ? "اصنع قائمة التشغيل" : "Create Playlist"}
-        </Button>
       </Box>
 
       <Modal
@@ -72,15 +51,6 @@ const ModelComponent = () => {
         <ModalOverlay />
         <ModalContent bg={"#212121"} color={"white"}>
           <ModalHeader>
-            {OwnList && (
-              <Alert color={"black"} status="success">
-                <AlertIcon />
-                {language === "en"
-                  ? "New playlist Create Done"
-                  : "  تم انشاء قائمة جديده"}
-              </Alert>
-            )}
-
             {language === "en" ? "New playlist" : "قائمة تشغيل جديدة"}
           </ModalHeader>
           <ModalCloseButton />
@@ -128,7 +98,6 @@ const ModelComponent = () => {
                       Title,
                       id: userobjecttype?.id,
                       description,
-                      Data: [],
                       userobjecttype,
                     })
                   )
@@ -173,4 +142,4 @@ const ModelComponent = () => {
   );
 };
 
-export default ModelComponent;
+export default ListModel;

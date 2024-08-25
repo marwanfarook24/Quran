@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { shiftLAstPlayed, UnshiftLastPlayed } from "../ReduxSystem/userSlice";
 import { reciters } from "../types/data";
 import { clickedSuwra } from "../ReduxSystem/recitersData";
+import ModelComponent from "./ModelComponent";
 
 const DrawerComponent = ({
   onopen,
@@ -30,12 +31,12 @@ const DrawerComponent = ({
   setopen: any;
 }) => {
   const { language } = useSelector((state: RootState) => state.Settings);
-  const { } = useHomeDataQuery(language === "ar" ? "ar" : "eng");
+  const {} = useHomeDataQuery(language === "ar" ? "ar" : "eng");
   const { onClose } = useDisclosure();
   const { userobjecttype, UserObject } = useSelector(
     (state: RootState) => state.userslogindata
   );
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [_played, setplayed] = useState(false);
 
   useEffect(() => {
@@ -111,7 +112,7 @@ const DrawerComponent = ({
             isOpen={onopen}
           >
             <DrawerOverlay />
-            <DrawerContent  >
+            <DrawerContent>
               <DrawerHeader borderBottomWidth="1px">
                 <span className="flex items-center gap-1">
                   <img src={`${IMageQuran}`} alt="" width={40} />
@@ -127,11 +128,7 @@ const DrawerComponent = ({
                   {language === "ar" ? "المكتبه" : " Your Library"}
                 </h1>
               </div>
-              <SimpleGrid
-                className=""
-                p={6}
-                columns={2}
-              >
+              <SimpleGrid className="" p={6} columns={2}>
                 <Box className="group hover:bg-[#58545485] p-6 cursor-pointer ">
                   <div className="favlist h-36 flex justify-center items-center cursor-pointer relative ">
                     <FaHeart className="text-white text-5xl " />
@@ -145,34 +142,10 @@ const DrawerComponent = ({
                 </Box>
               </SimpleGrid>
               <div className=" overflow-y-scroll">
-                <Box
-                  bg="#1F1F1F"
-                  p={7}
-                  className="flex flex-col items-start gap-3"
-                >
-                  <h1 className="text-white  text-xl font-extrabold ">
-                    {language === "ar" ? " اصنع قائمة التشغيل الخاصه بك  " : "Create you own Playlist"}
-
-                  </h1>
-                  <p className="text-white  text-sm font-extrabold ">
-                    {language === "ar" ? "هذه سهل سوف نساعدك" : "it,s easy we will help you"}
-
-                  </p>
-                  <Button
-                    // onClick={() => ("/loginpage")}
-                    bg={"white"}
-                    color={"black"}
-                    className="font-extrabold hover:scale-105   "
-                    padding={6}
-                    width="200px"
-                    borderRadius={20}
-                  >
-                    {language === "ar" ? "اصنع قائمة التشغيل" : "Create Playlist"}
-                  </Button>
-                </Box>
+                <ModelComponent />
                 <div className="flex flex-col p-5 ">
                   <h1 className="text-white"> Recently PLayed</h1>
-                  <div  >
+                  <div>
                     {UserObject?.map(
                       (
                         {
@@ -201,7 +174,7 @@ const DrawerComponent = ({
                             dispatch(
                               clickedSuwra({
                                 currentplaylist: [{ ...currentplaylist }],
-                                index: index = 0,
+                                index: (index = 0),
                                 boolean: true,
                               })
                             );
@@ -217,7 +190,11 @@ const DrawerComponent = ({
                                 {
                                   <Avatar
                                     src={reciters[recitersid]}
-                                    name={`${currentplaylist.writer ? currentplaylist.writer : currentplaylist.name}`}
+                                    name={`${
+                                      currentplaylist.writer
+                                        ? currentplaylist.writer
+                                        : currentplaylist.name
+                                    }`}
                                   />
                                 }
                                 <div className="group flex duration-150 cursor-pointer">
@@ -230,19 +207,22 @@ const DrawerComponent = ({
                             </Box>
                             <Box
                               w="1170px"
-                              className={`text-center font-extrabold ${language === "ar"
-                                ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
-                                : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
-                                } `}
+                              className={`text-center font-extrabold ${
+                                language === "ar"
+                                  ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
+                                  : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
+                              } `}
                             >
                               {currentplaylist.name}
                             </Box>
-                            {currentplaylist.writer && <Box
-                              w="1180px"
-                              className="text-center font-extrabold mobile:text-[0.8em]"
-                            >
-                              {currentplaylist.writer}
-                            </Box>}
+                            {currentplaylist.writer && (
+                              <Box
+                                w="1180px"
+                                className="text-center font-extrabold mobile:text-[0.8em]"
+                              >
+                                {currentplaylist.writer}
+                              </Box>
+                            )}
                           </HStack>
                         </Box>
                       )

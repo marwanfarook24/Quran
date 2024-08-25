@@ -40,8 +40,6 @@ type data = {
   password?: string;
 };
 
-
-
 const Loginpage = () => {
   const navigition = useNavigate();
   // const [remeber, setRemeber] = useState(false);
@@ -61,7 +59,6 @@ const Loginpage = () => {
       password: "******",
     },
   });
-
 
   const handleInputEmailChange = (e: string) => {
     e == "" ? setinputEmailRequied(true) : setinputEmailRequied(false);
@@ -117,7 +114,7 @@ const Loginpage = () => {
     }
   };
   return (
-    <div id="backgroundcolor">
+    <div id="backgroundcolor" className="h-[100vh]">
       {Toster}
       <div className="flex justify-center">
         <Card className=" mobile:my:0 tablet:my-10" bg={"black"} align="center">
@@ -159,8 +156,9 @@ const Loginpage = () => {
                       required: true,
                       pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                     })}
-                    focusBorderColor={`${inputEmailRequied || errors.email ? "Red" : "Green"
-                      }`}
+                    focusBorderColor={`${
+                      inputEmailRequied || errors.email ? "Red" : "Green"
+                    }`}
                     color={"white"}
                     type="text"
                     onChange={(e) => handleInputEmailChange(e.target.value)}
@@ -198,10 +196,11 @@ const Loginpage = () => {
                       color={"white"}
                       pr="4.5rem"
                       type={show ? "text" : "password"}
-                      focusBorderColor={`${inputPasswordRequied || errors.password
-                        ? "Red"
-                        : "Green"
-                        }`}
+                      focusBorderColor={`${
+                        inputPasswordRequied || errors.password
+                          ? "Red"
+                          : "Green"
+                      }`}
                       onChange={(e) =>
                         handleInputPasswordChange(e.target.value)
                       }

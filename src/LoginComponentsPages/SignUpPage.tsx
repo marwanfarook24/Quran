@@ -47,89 +47,101 @@ const SignUpPage = () => {
       username: z
         .string()
         .includes("#", {
-          message: `${language === "ar"
-            ? "يجب ان يكون يحتوي علي # "
-            : "Invalid input: must include #"
-            }`,
+          message: `${
+            language === "ar"
+              ? "يجب ان يكون يحتوي علي # "
+              : "Invalid input: must include #"
+          }`,
         })
         .min(2, {
-          message: `${language
-            ? "يجب ان يكون 2 عنصر او اكثر"
-            : "Must be 2 or more characters long"
-            }`,
+          message: `${
+            language
+              ? "يجب ان يكون 2 عنصر او اكثر"
+              : "Must be 2 or more characters long"
+          }`,
         }),
       firstname: z
         .string()
         .min(3, {
-          message: `${language === "ar"
-            ? "يجب ان يكون 3 عنصر او اكثر"
-            : "Must be 3 or more characters long"
-            }`,
+          message: `${
+            language === "ar"
+              ? "يجب ان يكون 3 عنصر او اكثر"
+              : "Must be 3 or more characters long"
+          }`,
         })
         .refine(
           (val) => !/[1-9]/g.test(val),
           (_val) => ({
-            message: `${language === "ar"
-              ? " لا يمكن ان تضع هنا رقم"
-              : "can not put number here"
-              }`,
+            message: `${
+              language === "ar"
+                ? " لا يمكن ان تضع هنا رقم"
+                : "can not put number here"
+            }`,
           })
         ),
       lastname: z
         .string()
         .min(3, {
-          message: `${language === "ar"
-            ? "يجب ان يكون 3 عنصر او اكثر"
-            : "Must be 3 or more characters long"
-            }`,
+          message: `${
+            language === "ar"
+              ? "يجب ان يكون 3 عنصر او اكثر"
+              : "Must be 3 or more characters long"
+          }`,
         })
         .refine(
           (val) => !/[1-9]/g.test(val),
           (val) => ({
-            message: `${val}${language === "ar"
-              ? " لا يمكن ان تضع هنا رقم"
-              : "can not put number here"
-              } `,
+            message: `${val}${
+              language === "ar"
+                ? " لا يمكن ان تضع هنا رقم"
+                : "can not put number here"
+            } `,
           })
         ),
       email: z.string().email({
-        message: `${language === "ar"
-          ? "الايميل الايكتروني غير صحيح"
-          : "Invalid email address"
-          }`,
+        message: `${
+          language === "ar"
+            ? "الايميل الايكتروني غير صحيح"
+            : "Invalid email address"
+        }`,
       }),
       password: z
         .string()
         .min(5, {
-          message: `${language === "ar"
-            ? "يجب ان يكون 5 عنصر او اكثر"
-            : "Must be 5 or more characters long"
-            }`,
+          message: `${
+            language === "ar"
+              ? "يجب ان يكون 5 عنصر او اكثر"
+              : "Must be 5 or more characters long"
+          }`,
         })
         .max(10, {
-          message: `${language === "ar"
-            ? "يجب ان يكون اقل من  10  عنصر "
-            : "Must be less 10  characters"
-            }`,
+          message: `${
+            language === "ar"
+              ? "يجب ان يكون اقل من  10  عنصر "
+              : "Must be less 10  characters"
+          }`,
         }),
       confirmpassword: z
         .string()
         .min(5, {
-          message: `${language === "ar"
-            ? "يجب ان يكون 5 عنصر او اكثر"
-            : "Must be 5 or more characters long"
-            }`,
+          message: `${
+            language === "ar"
+              ? "يجب ان يكون 5 عنصر او اكثر"
+              : "Must be 5 or more characters long"
+          }`,
         })
         .max(10, {
-          message: `${language === "ar"
-            ? "يجب ان يكون اقل من  10  عنصر "
-            : "Must be less 10  characters"
-            }`,
+          message: `${
+            language === "ar"
+              ? "يجب ان يكون اقل من  10  عنصر "
+              : "Must be less 10  characters"
+          }`,
         }),
     })
     .refine((data) => data.password === data.confirmpassword, {
-      message: `${language === "ar" ? "كلمه المرور غير متطابقه " : "Password is not Match"
-        }`,
+      message: `${
+        language === "ar" ? "كلمه المرور غير متطابقه " : "Password is not Match"
+      }`,
       path: ["confirmpassword"],
     });
 
@@ -182,18 +194,20 @@ const SignUpPage = () => {
         dismis();
         NotifyEroorServer();
         setError("root", {
-          message: `${language === "ar"
-            ? "الخدام غير متاح الان!"
-            : "Server is Down Now Try Agin Later!"
-            }`,
+          message: `${
+            language === "ar"
+              ? "الخدام غير متاح الان!"
+              : "Server is Down Now Try Agin Later!"
+          }`,
         });
       }
     } catch (e) {
       setError("root", {
-        message: `${language === "ar"
-          ? "الايميل مضاف بالفعل من قبل"
-          : "**email is already exists**"
-          }`,
+        message: `${
+          language === "ar"
+            ? "الايميل مضاف بالفعل من قبل"
+            : "**email is already exists**"
+        }`,
       });
     }
   };
@@ -204,8 +218,8 @@ const SignUpPage = () => {
   // ShowPassowrd
 
   return (
-    <div>
-      <div className="flex justify-center" id="backgroundcolor">
+    <div className="h-[100vh]" id="backgroundcolor">
+      <div className="flex justify-center ">
         <h1>{Toster}</h1>
         <Card className="my-10" bg={"black"} align="center">
           <img src={logo} alt="" width={90} />
@@ -226,8 +240,9 @@ const SignUpPage = () => {
                 {...register("username", {})}
                 color={"white"}
                 focusBorderColor={`${errors.username ? "Red" : "Green"}`}
-                placeholder={`${language === "ar" ? "ادخل اسم المستخدم" : "EnterUserName..."
-                  }`}
+                placeholder={`${
+                  language === "ar" ? "ادخل اسم المستخدم" : "EnterUserName..."
+                }`}
               />
               {errors.username && (
                 <p className="text-red-400">{errors.username?.message}</p>
@@ -242,8 +257,9 @@ const SignUpPage = () => {
                 {...register("firstname", {})}
                 color={"white"}
                 focusBorderColor={`${errors.firstname ? "Red" : "Green"}`}
-                placeholder={`${language === "ar" ? "ادخل اسم الاول" : "YourFirtsName..."
-                  }`}
+                placeholder={`${
+                  language === "ar" ? "ادخل اسم الاول" : "YourFirtsName..."
+                }`}
               />
               {errors.firstname && (
                 <p className="text-red-400 text-[1em] mt-1 ">
@@ -260,8 +276,9 @@ const SignUpPage = () => {
                 {...register("lastname", {})}
                 color={"white"}
                 focusBorderColor={`${errors.lastname ? "Red" : "Green"}`}
-                placeholder={`${language === "ar" ? "ادخل اسم الاخير" : "YourLastName..."
-                  }`}
+                placeholder={`${
+                  language === "ar" ? "ادخل اسم الاخير" : "YourLastName..."
+                }`}
               />
               {errors.lastname && (
                 <p className="text-red-400 text-[1em] mt-1 ">
@@ -295,8 +312,9 @@ const SignUpPage = () => {
                   color={"white"}
                   pr="4.5rem"
                   type={show ? "text" : "password"}
-                  placeholder={`${language === "ar" ? "ادخل كلمه المرور" : "Enter password..."
-                    }`}
+                  placeholder={`${
+                    language === "ar" ? "ادخل كلمه المرور" : "Enter password..."
+                  }`}
                   focusBorderColor={`${errors.password ? "Red" : "Green"}`}
                 />
                 <InputRightElement width="4.5rem">
@@ -359,12 +377,14 @@ const SignUpPage = () => {
                   color={"white"}
                   pr="4.5rem"
                   type={showconfirm ? "text" : "password"}
-                  placeholder={`${language === "ar"
-                    ? "ادخل تاكيد كلمه المرور"
-                    : "ConfirmPassword..."
-                    }`}
-                  focusBorderColor={`${errors.confirmpassword ? "Red" : "Green"
-                    }`}
+                  placeholder={`${
+                    language === "ar"
+                      ? "ادخل تاكيد كلمه المرور"
+                      : "ConfirmPassword..."
+                  }`}
+                  focusBorderColor={`${
+                    errors.confirmpassword ? "Red" : "Green"
+                  }`}
                 />
                 <InputRightElement width="4.5rem">
                   {showconfirm ? (

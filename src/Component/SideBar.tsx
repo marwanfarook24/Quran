@@ -20,7 +20,11 @@ import { reciters } from "../types/data";
 import { shiftLAstPlayed, UnshiftLastPlayed } from "../ReduxSystem/userSlice";
 import { clickedSuwra } from "../ReduxSystem/recitersData";
 import { useNavigate } from "react-router-dom";
-import { Changestate, choosenRadioAudio, setChangestate } from "../ReduxSystem/RadioSlice";
+import {
+  Changestate,
+  choosenRadioAudio,
+  setChangestate,
+} from "../ReduxSystem/RadioSlice";
 import ModelComponent from "./ModelComponent";
 // import { shiftLAstPlayed } from "../ReduxSystem/userSlice";
 const SideBar = ({ isLoading }: { isLoading: boolean }) => {
@@ -30,9 +34,8 @@ const SideBar = ({ isLoading }: { isLoading: boolean }) => {
   );
   const dispatch = useDispatch();
   const [_played, setplayed] = useState(false);
-  const { } = useHomeDataQuery(language === "ar" ? "ar" : "eng");
+  const {} = useHomeDataQuery(language === "ar" ? "ar" : "eng");
   useEffect(() => {
-
     if (userobjecttype && userobjecttype.LastPlayed.length > 5) {
       dispatch(
         shiftLAstPlayed({
@@ -43,11 +46,8 @@ const SideBar = ({ isLoading }: { isLoading: boolean }) => {
     } else {
       dispatch(UnshiftLastPlayed(userobjecttype));
     }
-
-
-
   }, [userobjecttype]);
-  const navigition = useNavigate()
+  const navigition = useNavigate();
   return (
     <div className="">
       {isLoading ? (
@@ -99,8 +99,6 @@ const SideBar = ({ isLoading }: { isLoading: boolean }) => {
                   d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
                 />
               </svg>
-
-
             </Box>
             <Box className="flex justify-center" rounded={50}>
               <svg
@@ -179,7 +177,7 @@ const SideBar = ({ isLoading }: { isLoading: boolean }) => {
                       Make Sure To Log In
                     </h1>
                     <Button
-                      // onClick={() => ("/loginpage")}
+                      onClick={() => navigition("/loginpage")}
                       bg={"white"}
                       color={"black"}
                       className="font-extrabold hover:scale-105   "
@@ -218,10 +216,10 @@ const SideBar = ({ isLoading }: { isLoading: boolean }) => {
                     <SimpleGrid p={6} columns={2} gap={2}>
                       <Box
                         onClick={() => navigition("/favlistpage")}
-                        className="group hover:bg-[#58545485] p-6 cursor-pointer ">
+                        className="group hover:bg-[#58545485] p-6 cursor-pointer "
+                      >
                         <div className="favlist h-36 flex justify-center items-center cursor-pointer relative ">
                           <FaHeart className="text-white text-5xl " />
-                          {/* <BsPlayCircleFill className="rounded-full scale-0 group-hover:scale-110 text-[#1DB954] duration-500  absolute bottom-0  left-3   bg-[#000000] text-5xl " /> */}
                         </div>
                         <div className="flex items-center justify-center mt-3   ">
                           <h1 className="text-white ">
@@ -231,13 +229,11 @@ const SideBar = ({ isLoading }: { isLoading: boolean }) => {
                           </h1>
                         </div>
                       </Box>
-
-
                     </SimpleGrid>
                     <ModelComponent />
                     <div className="flex flex-col p-3 ">
                       <h1 className="text-white"> Recently PLayed</h1>
-                      <div className="" >
+                      <div className="">
                         {UserObject?.map(
                           (
                             {
@@ -252,7 +248,7 @@ const SideBar = ({ isLoading }: { isLoading: boolean }) => {
                                 url: string;
                                 urlaudio: string;
                                 nameAudio: string;
-                                index: number
+                                index: number;
                               };
                               recitersid: number;
                             },
@@ -270,12 +266,15 @@ const SideBar = ({ isLoading }: { isLoading: boolean }) => {
                                 dispatch(
                                   clickedSuwra({
                                     currentplaylist: [{ ...currentplaylist }],
-                                    index: index = 0,
+                                    index: (index = 0),
                                     boolean: true,
                                   })
                                 );
                                 setplayed(true);
-                                recitersid ? dispatch(setChangestate()) : dispatch(Changestate()), dispatch(choosenRadioAudio(currentplaylist))
+                                recitersid
+                                  ? dispatch(setChangestate())
+                                  : dispatch(Changestate()),
+                                  dispatch(choosenRadioAudio(currentplaylist));
                               }}
                             >
                               <HStack spacing="24px">
@@ -287,7 +286,11 @@ const SideBar = ({ isLoading }: { isLoading: boolean }) => {
                                     {
                                       <Avatar
                                         src={reciters[recitersid]}
-                                        name={`${currentplaylist.writer ? currentplaylist.writer : currentplaylist.name}`}
+                                        name={`${
+                                          currentplaylist.writer
+                                            ? currentplaylist.writer
+                                            : currentplaylist.name
+                                        }`}
                                       />
                                     }
                                     <div className="group flex duration-150 cursor-pointer">
@@ -300,19 +303,22 @@ const SideBar = ({ isLoading }: { isLoading: boolean }) => {
                                 </Box>
                                 <Box
                                   w="1170px"
-                                  className={`text-center font-extrabold ${language === "ar"
-                                    ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
-                                    : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
-                                    } `}
+                                  className={`text-center font-extrabold ${
+                                    language === "ar"
+                                      ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
+                                      : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
+                                  } `}
                                 >
                                   {currentplaylist.name}
                                 </Box>
-                                {currentplaylist.writer && <Box
-                                  w="1180px"
-                                  className="text-center font-extrabold mobile:text-[0.8em]"
-                                >
-                                  {currentplaylist.writer}
-                                </Box>}
+                                {currentplaylist.writer && (
+                                  <Box
+                                    w="1180px"
+                                    className="text-center font-extrabold mobile:text-[0.8em]"
+                                  >
+                                    {currentplaylist.writer}
+                                  </Box>
+                                )}
                               </HStack>
                             </Box>
                           )
