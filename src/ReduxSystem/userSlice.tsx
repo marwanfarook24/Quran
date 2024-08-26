@@ -21,15 +21,15 @@ type props = {
     lastname: string | undefined;
     email: string | undefined;
     password: string | undefined;
-    favList: object[];
+    OwnPlaylist: [] | undefined;
+    favList: object[] | undefined;
     LastPlayed: object[] | undefined;
     id: string | undefined | number;
   };
 };
-
 type test = number | string;
-
 type userobj = {
+  dataAddInOwnList: true | false;
   OwnList: true | false;
   updateState: true | false;
   UserObject: [];
@@ -48,6 +48,7 @@ type userobj = {
 };
 
 const userobject: userobj = {
+  dataAddInOwnList: true,
   updateState: true,
   userobjecttype: null,
   UserObject: [],
@@ -152,7 +153,7 @@ export const userdataAddInOwnList = createAsyncThunk<
   any,
   { rejectedMeta?: String }
 >("userdataAddInOwnList", async (arg, AsyncThunk) => {
-  console.log(arg);
+  console.log([...arg.OwnPlaylist[arg.index].Data, arg.Ayhah]);
 
   const { rejectWithValue } = AsyncThunk;
   try {
@@ -161,7 +162,12 @@ export const userdataAddInOwnList = createAsyncThunk<
       url: `http://localhost:3000/users/${arg.id}`,
       data: {
         ...arg.userobjecttype,
-        OwnPlaylist: [...arg.data],
+        OwnPlaylist: [
+          {
+            ...arg.OwnPlaylist[arg.index],
+            Data: [...arg.OwnPlaylist[arg.index].Data, arg.Ayhah],
+          },
+        ],
       },
     });
 
@@ -235,6 +241,15 @@ const userslogin = createSlice({
       _state.OwnList = true;
     });
     builder.addCase(userdataOwnList.rejected, (_state, _action) => {});
+    builder.addCase(userdataAddInOwnList.pending, (_state, _action) => {
+      // _state.loading = true
+    });
+    builder.addCase(userdataAddInOwnList.fulfilled, (_state, _action) => {
+      _state.dataAddInOwnList = !_state.dataAddInOwnList;
+    });
+    builder.addCase(userdataAddInOwnList.rejected, (_state, _action) => {});
+
+    userdataAddInOwnList;
   },
   // ________________________________________________________//
 });

@@ -26,10 +26,10 @@ type datapushed = {
   firstname: string;
   lastname: string;
   password: string;
+  OwnPlaylist: [];
   favList: [];
   Lastplayed: [];
 };
-
 
 export const userdata = createAsyncThunk<
   any,
@@ -53,7 +53,6 @@ export const pushdata = createAsyncThunk<
   datapushed,
   { rejectValue: string }
 >("pushdata", async (defult, AsyncThunk) => {
-
   const { rejectWithValue } = AsyncThunk;
   try {
     const info = await axios({
@@ -67,8 +66,6 @@ export const pushdata = createAsyncThunk<
   }
 });
 
-
-
 const users = createSlice({
   name: "users",
   initialState: initialState,
@@ -80,13 +77,11 @@ const users = createSlice({
     builder.addCase(userdata.fulfilled, (state, action) => {
       state.usersrespones = action.payload;
     });
-    builder.addCase(userdata.rejected, (_state, _action) => { });
+    builder.addCase(userdata.rejected, (_state, _action) => {});
     // data/push/post
-    builder.addCase(pushdata.pending, (_state, _action) => { });
-    builder.addCase(pushdata.fulfilled, (_state, _action) => {
-
-    });
-    builder.addCase(pushdata.rejected, (_state, _action) => { });
+    builder.addCase(pushdata.pending, (_state, _action) => {});
+    builder.addCase(pushdata.fulfilled, (_state, _action) => {});
+    builder.addCase(pushdata.rejected, (_state, _action) => {});
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
   },
 });

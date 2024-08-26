@@ -91,7 +91,6 @@ const ReciterisDetails = () => {
     reciters[recitersId],
     rewaya,
     userobjecttype?.LastPlayed.length,
-    userobjecttype?.OwnPlaylist.length,
   ]);
 
   const rewayachoosen = () => {
@@ -419,6 +418,7 @@ const ReciterisDetails = () => {
                                 recitersid: choosendata.reciters[0].id,
                               },
                             ],
+                            OwnPlaylist: userobjecttype?.OwnPlaylist,
                             LastPlayed: userobjecttype?.LastPlayed,
                             id: userobjecttype?.id,
                           },
@@ -564,6 +564,8 @@ const ReciterisDetails = () => {
                                             lastname: userobjecttype?.lastname,
                                             email: userobjecttype?.email,
                                             password: userobjecttype?.password,
+                                            OwnPlaylist:
+                                              userobjecttype?.OwnPlaylist,
                                             favList: [],
                                             LastPlayed: [
                                               ...(userobjecttype?.LastPlayed as []),
@@ -643,10 +645,9 @@ const ReciterisDetails = () => {
                                         <IoMdAdd className="text-xl" />
                                         <ListModel />
                                       </MenuItem>
-
                                       <MenuDivider />
                                       {userobjecttype?.OwnPlaylist.map(
-                                        ({ title, Data }, index) => (
+                                        ({ title }, index) => (
                                           <MenuItem
                                             key={index}
                                             _hover={{ bg: "#3E3C3C" }}
@@ -654,11 +655,14 @@ const ReciterisDetails = () => {
                                             onClick={() =>
                                               dispatch(
                                                 userdataAddInOwnList({
-                                                  id: userobjecttype.id,
-                                                  data: [
-                                                    ...Data,
-                                                    { name, writer, id, src },
-                                                  ],
+                                                  ...userobjecttype,
+                                                  index,
+                                                  Ayhah: {
+                                                    name,
+                                                    writer,
+                                                    id,
+                                                    src,
+                                                  },
                                                 })
                                               )
                                             }
@@ -703,7 +707,9 @@ const ReciterisDetails = () => {
                                             lastname: userobjecttype?.lastname,
                                             email: userobjecttype?.email,
                                             password: userobjecttype?.password,
-                                            favList: [],
+                                            favList: userobjecttype?.favList,
+                                            OwnPlaylist:
+                                              userobjecttype?.OwnPlaylist,
                                             LastPlayed: [
                                               ...(userobjecttype?.LastPlayed as []),
                                               {
@@ -765,6 +771,7 @@ const ReciterisDetails = () => {
                                 lastname: userobjecttype?.lastname,
                                 email: userobjecttype?.email,
                                 password: userobjecttype?.password,
+                                OwnPlaylist: userobjecttype?.OwnPlaylist,
                                 favList: [],
                                 LastPlayed: [
                                   ...(userobjecttype?.LastPlayed as []),

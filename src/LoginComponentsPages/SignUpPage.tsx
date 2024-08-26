@@ -180,6 +180,7 @@ const SignUpPage = () => {
               email: data.email,
               password: data.password,
               favList: [],
+              OwnPlaylist: [],
               Lastplayed: [],
             })
           ).unwrap();
