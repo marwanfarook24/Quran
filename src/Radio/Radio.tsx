@@ -395,6 +395,7 @@ const radio = () => {
                                     lastname: userobjecttype?.lastname,
                                     email: userobjecttype?.email,
                                     password: userobjecttype?.password,
+                                    OwnPlaylist: userobjecttype?.OwnPlaylist,
                                     favList: [],
                                     LastPlayed: [
                                       ...(userobjecttype?.LastPlayed as []),
@@ -480,6 +481,8 @@ const radio = () => {
                                           lastname: userobjecttype?.lastname,
                                           email: userobjecttype?.email,
                                           password: userobjecttype?.password,
+                                          OwnPlaylist:
+                                            userobjecttype?.OwnPlaylist,
                                           favList: [],
                                           LastPlayed: [
                                             ...(userobjecttype?.LastPlayed as []),
