@@ -35,7 +35,7 @@ const ModelComponent = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [description, setdescription] = useState("");
   const [Title, setTitle] = useState("");
-  useEffect(() => {}, [OwnList]);
+  useEffect(() => { }, [OwnList]);
 
   return (
     <>

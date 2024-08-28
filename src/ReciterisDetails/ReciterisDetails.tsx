@@ -72,6 +72,7 @@ const ReciterisDetails = () => {
   const [played, setplayed] = useState(false);
   const [Checked, setChecked] = useState<undefined | boolean>(false);
   useEffect(() => {
+
     choosendata?.reciters.map(({ id }: { id: number; name: string }) => {
       setrecitersId(id);
     });
@@ -446,11 +447,10 @@ const ReciterisDetails = () => {
                     </svg>
                   </div>
                   <input
-                    placeholder={`${
-                      language === "ar"
-                        ? "ابحث في قائمة التشغيل"
-                        : "Search in Playlist"
-                    }`}
+                    placeholder={`${language === "ar"
+                      ? "ابحث في قائمة التشغيل"
+                      : "Search in Playlist"
+                      }`}
                     onChange={(e) => SerachSwura(e.target.value)}
                     type="text"
                     className="outline-none  bg-[#242424] w-full text-white   font-normal px-4"
@@ -587,11 +587,10 @@ const ReciterisDetails = () => {
                             </Box>
                             <Box
                               w="1170px"
-                              className={`text-center font-extrabold ${
-                                language === "ar"
-                                  ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
-                                  : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
-                              } `}
+                              className={`text-center font-extrabold ${language === "ar"
+                                ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
+                                : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
+                                } `}
                             >
                               {name}
                             </Box>
@@ -656,6 +655,7 @@ const ReciterisDetails = () => {
                                               dispatch(
                                                 userdataAddInOwnList({
                                                   ...userobjecttype,
+                                                  title,
                                                   index,
                                                   Ayhah: {
                                                     name,
@@ -663,7 +663,9 @@ const ReciterisDetails = () => {
                                                     id,
                                                     src,
                                                   },
-                                                })
+                                                  Playlist: userobjecttype.OwnPlaylist[index],
+                                                },
+                                                )
                                               )
                                             }
                                           >
@@ -808,11 +810,10 @@ const ReciterisDetails = () => {
                           </Box>
                           <Box
                             w="1170px"
-                            className={`text-center font-extrabold ${
-                              language === "ar"
-                                ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
-                                : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
-                            }`}
+                            className={`text-center font-extrabold ${language === "ar"
+                              ? "mobile:text-[1.3em] tablet:text-[1.5] laptop:text-2xl"
+                              : "mobile:text-[0.7em] tablet:text-sm laptop:text-xl"
+                              }`}
                           >
                             {name}
                           </Box>

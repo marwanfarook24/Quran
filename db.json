@@ -119,26 +119,12 @@
       "id": "ZvtaGmi"
     },
     {
+      "email": "marwanfarook99@gmail.com",
       "username": "marwan-farook#",
       "firstname": "marwan",
       "lastname": "marwan",
-      "email": "marwanfarook99@gmail.com",
       "password": "12345",
       "favList": [],
-      "OwnPlaylist": [
-        {
-          "title": "Play",
-          "description": "",
-          "Data": [
-            {
-              "name": "Al-Fatihah ",
-              "writer": "Ibrahim Al-Akdar",
-              "id": 1,
-              "src": "https://server6.mp3quran.net/akdr//001.mp3"
-            }
-          ]
-        }
-      ],
       "LastPlayed": [
         {
           "currentplaylist": {
@@ -148,6 +134,44 @@
             "name": "Al-Fatihah "
           },
           "recitersid": 1
+        },
+        {
+          "currentplaylist": {
+            "src": "https://server6.mp3quran.net/akdr//004.mp3",
+            "id": 4,
+            "writer": "Ibrahim Al-Akdar",
+            "name": "An-Nisa' "
+          },
+          "recitersid": 1
+        }
+      ],
+      "OwnPlaylist": [
+        [
+          "PlayList2"
+        ],
+        {
+          "title": "PlayList2",
+          "description": "",
+          "Data": [
+            {
+              "name": "Al-Fatihah ",
+              "writer": "Ibrahim Al-Akdar",
+              "id": 1,
+              "src": "https://server6.mp3quran.net/akdr//001.mp3"
+            },
+            {
+              "name": "Al-Fatihah ",
+              "writer": "Ibrahim Al-Akdar",
+              "id": 1,
+              "src": "https://server6.mp3quran.net/akdr//001.mp3"
+            },
+            {
+              "name": "Al-Fatihah ",
+              "writer": "Ibrahim Al-Akdar",
+              "id": 1,
+              "src": "https://server6.mp3quran.net/akdr//001.mp3"
+            }
+          ]
         }
       ],
       "id": "j3LsgxM"

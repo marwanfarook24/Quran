@@ -129,6 +129,7 @@ export const userdataOwnList = createAsyncThunk<
   PlayList,
   { rejectedMeta?: String }
 >("userdataOwnList", async (arg, AsyncThunk) => {
+
   const { rejectWithValue } = AsyncThunk;
   try {
     const info = await axios({
@@ -153,7 +154,9 @@ export const userdataAddInOwnList = createAsyncThunk<
   any,
   { rejectedMeta?: String }
 >("userdataAddInOwnList", async (arg, AsyncThunk) => {
-  console.log([...arg.OwnPlaylist[arg.index].Data, arg.Ayhah]);
+  console.log(
+
+  );
 
   const { rejectWithValue } = AsyncThunk;
   try {
@@ -161,7 +164,6 @@ export const userdataAddInOwnList = createAsyncThunk<
       method: "patch",
       url: `http://localhost:3000/users/${arg.id}`,
       data: {
-        ...arg.userobjecttype,
         OwnPlaylist: [
           {
             ...arg.OwnPlaylist[arg.index],
@@ -176,6 +178,9 @@ export const userdataAddInOwnList = createAsyncThunk<
     console.log(rejectWithValue(e));
   }
 });
+
+
+
 
 const userslogin = createSlice({
   name: "userslogin",
@@ -212,7 +217,7 @@ const userslogin = createSlice({
         _state.userobjecttype = action.payload;
       }
     );
-    builder.addCase(userdatalogin.rejected, (_state, _action) => {});
+    builder.addCase(userdatalogin.rejected, (_state, _action) => { });
 
     builder.addCase(userdatalastPLayed.pending, (_state, _action) => {
       // _state.loading = true
@@ -223,7 +228,7 @@ const userslogin = createSlice({
         _state.updateState = !_state.updateState;
       }
     );
-    builder.addCase(userdatalastPLayed.rejected, (_state, _action) => {});
+    builder.addCase(userdatalastPLayed.rejected, (_state, _action) => { });
     builder.addCase(userdataFavList.pending, (_state, _action) => {
       // _state.loading = true
     });
@@ -233,22 +238,21 @@ const userslogin = createSlice({
         _state.updateState = !_state.updateState;
       }
     );
-    builder.addCase(userdataFavList.rejected, (_state, _action) => {});
+    builder.addCase(userdataFavList.rejected, (_state, _action) => { });
     builder.addCase(userdataOwnList.pending, (_state, _action) => {
       // _state.loading = true
     });
     builder.addCase(userdataOwnList.fulfilled, (_state, _action) => {
       _state.OwnList = true;
     });
-    builder.addCase(userdataOwnList.rejected, (_state, _action) => {});
+    builder.addCase(userdataOwnList.rejected, (_state, _action) => { });
     builder.addCase(userdataAddInOwnList.pending, (_state, _action) => {
       // _state.loading = true
     });
     builder.addCase(userdataAddInOwnList.fulfilled, (_state, _action) => {
       _state.dataAddInOwnList = !_state.dataAddInOwnList;
     });
-    builder.addCase(userdataAddInOwnList.rejected, (_state, _action) => {});
-
+    builder.addCase(userdataAddInOwnList.rejected, (_state, _action) => { });
     userdataAddInOwnList;
   },
   // ________________________________________________________//
